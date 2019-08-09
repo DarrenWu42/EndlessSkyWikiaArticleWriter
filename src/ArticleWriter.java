@@ -16,31 +16,29 @@ import java.text.DecimalFormat;
 
 public class ArticleWriter{
 	public static void main(String[]args) {
-		//input string is directly from game files, just copy and paste from outfit to the last quote of the description and run this
-		String input ="outfit \"Korath Slicer\"\r\n" + 
+		//input string is directly from game files, just copy and paste from outfit to the last quote of the description and run this currently has sample inside
+		String input ="outfit \"Beam Laser\"\r\n" + 
 				"	category \"Guns\"\r\n" + 
-				"	cost 832000\r\n" + 
-				"	thumbnail \"outfit/slicer\"\r\n" + 
-				"	\"mass\" 46\r\n" + 
-				"	\"outfit space\" -46\r\n" + 
-				"	\"weapon capacity\" -46\r\n" + 
+				"	cost 29000\r\n" + 
+				"	thumbnail \"outfit/laser\"\r\n" + 
+				"	\"mass\" 8\r\n" + 
+				"	\"outfit space\" -8\r\n" + 
+				"	\"weapon capacity\" -8\r\n" + 
 				"	\"gun ports\" -1\r\n" + 
 				"	weapon\r\n" + 
-				"		sprite \"projectile/slicer\"\r\n" + 
-				"			\"frame rate\" 6\r\n" + 
-				"		sound \"slicer\"\r\n" + 
-				"		\"hit effect\" \"slicer impact\"\r\n" + 
-				"		\"inaccuracy\" 0\r\n" + 
-				"		\"velocity\" 520\r\n" + 
+				"		sprite \"projectile/laser\"\r\n" + 
+				"			\"frame rate\" 1\r\n" + 
+				"		sound \"laser\"\r\n" + 
+				"		\"hit effect\" \"beam laser impact\"\r\n" + 
+				"		\"inaccuracy\" .5\r\n" + 
+				"		\"velocity\" 300\r\n" + 
 				"		\"lifetime\" 1\r\n" + 
-				"		\"reload\" 1.62\r\n" + 
-				"		\"burst reload\" 1\r\n" + 
-				"		\"burst count\" 17\r\n" + 
-				"		\"firing energy\" 5.6\r\n" + 
-				"		\"firing heat\" 17.8\r\n" + 
-				"		\"shield damage\" 6.3\r\n" + 
-				"		\"hull damage\" 16.7\r\n" + 
-				"	description \"This massive beam weapon is relatively ineffective against shields, but cuts through hull armor like it's made of paper.\"";
+				"		\"reload\" 1\r\n" + 
+				"		\"firing energy\" .5\r\n" + 
+				"		\"firing heat\" 1.2\r\n" + 
+				"		\"shield damage\" 1\r\n" + 
+				"		\"hull damage\" 1.3\r\n" + 
+				"	description \"In the early part of the space era, the settlements in the region of space known as the Deep developed in relative isolation from the rest of human space. One result of that isolation is that their weapons technology mostly uses beam weapons, instead of the energy projectile weapons that are more common elsewhere.\"";
 		String type = input.substring(0,input.indexOf(" ")); //3 types i'll use, System, Ship, Outfit		
 		//variable to output
 		String output = "";
@@ -90,14 +88,18 @@ public class ArticleWriter{
 				try {	
 					double number = Double.valueOf(remaining.substring(remaining.indexOf(" ")+1,remaining.indexOf("\r")));
 					//solve for per second calcs when finding damage
-					if(temp.equals("shield_damage")||temp.equals("hull_damage")||temp.equals("firing_energy")||temp.equals("firing_heat")||temp.equals("firing_fuel")) {
-						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc);
+					if(temp.equals("shield_damage")||temp.equals("hull_damage")) {
+						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc)+" damage";
 						if(name.contains("Laser")||name.contains("Beam")||name.contains("Electron"))
 							remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 						else {
-							infobox +="|"+temp+"_per_shot="+format.format(number);
+							infobox +="|"+temp+"_per_shot="+format.format(number)+" damage";
 							remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 						}
+					}
+					//solves for per second calcs when finding energy, heat, and fuel
+					else if(temp.equals("firing_energy")||temp.equals("firing_heat")||temp.equals("firing_fuel")) {
+						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc);
 					}
 					else {
 						//multiplies numbers by needed amounts
@@ -124,6 +126,7 @@ public class ArticleWriter{
 						remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 					}
 				}
+				//catches a line that doesn't work and erases it's existence
 				catch(NumberFormatException ex) {
 					remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 					//System.out.println("caught number format exception");
