@@ -1,11 +1,13 @@
 /*
-/Endless Sky Wikia Standardized Article Writer Version 1.0
-/Made by 1NF1N173#9254 on Discord
-/Infiknight999 on Wikia Fandom
-/Message me on discord if you have questions about the code
-/
-/Date created: 8 August 2019
-/Last update: 8 August 2019
+*Endless Sky Wikia Standardized Article Writer Version 1.0
+*Made by 1NF1N173#9254 on Discord
+*Infiknight999 on Wikia Fandom
+*Infinight999 on Github
+*Message me on discord if you have questions about the code
+*
+*Date created: 8 August 2019
+*Last update: 8 August 2019
+*Github page: https://github.com/Infinight999/EndlessSkyWikiaArticleWriter
 */
 package endlessSkyWikiaArticleHelper;
 
