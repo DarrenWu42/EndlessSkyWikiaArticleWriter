@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 
 public class ArticleWriter{
 	public static void main(String[]args) {
-		//input string is directly from game files, just copy and paste from outfit to the last quote of the description and run this currently has sample inside
+		//input string is directly from game files, just copy and paste from outfit to the last quote of the description and run this, currently has sample inside
 		String input ="outfit \"Beam Laser\"\r\n" + 
 				"	category \"Guns\"\r\n" + 
 				"	cost 29000\r\n" + 
@@ -89,20 +89,21 @@ public class ArticleWriter{
 					double number = Double.valueOf(remaining.substring(remaining.indexOf(" ")+1,remaining.indexOf("\r")));
 					//solve for per second calcs when finding damage
 					if(temp.equals("shield_damage")||temp.equals("hull_damage")) {
-						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc)+" damage";
+						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc)+" damage per second";
 						if(name.contains("Laser")||name.contains("Beam")||name.contains("Electron"))
 							remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 						else {
-							infobox +="|"+temp+"_per_shot="+format.format(number)+" damage";
+							infobox +="|"+temp+"_per_shot="+format.format(number)+" damage per shot";
 							remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 						}
 					}
 					//solves for per second calcs when finding energy, heat, and fuel
 					else if(temp.equals("firing_energy")||temp.equals("firing_heat")||temp.equals("firing_fuel")) {
 						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc);
+						remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 					}
 					else {
-						//multiplies numbers by needed amounts
+						//multiplies numbers by needed amounts (found in source code)
 						if(temp.equals("active_cooling")||temp.equals("afterburner_energy")||temp.equals("afterburner_fuel")||temp.equals("afterburner_heat")||temp.equals("cloak")||temp.equals("cloaking_energy")||temp.equals("cloaking_fuel")||temp.equals("cloaking_heat")||temp.equals("cooling")||temp.equals("cooling_energy")||temp.equals("energy_consumption")||temp.equals("energy_generation")||temp.equals("fuel_consumption")||temp.equals("fuel_energy")||temp.equals("fuel_generation")||temp.equals("fuel_heat")||temp.equals("heat_generation")||temp.equals("heat_dissipation")||temp.equals("hull_repair")||temp.equals("hull_energy")||temp.equals("hull_fuel")||temp.equals("hull_heat")||temp.equals("jump_speed")||temp.equals("reverse_thrusting")||temp.equals("reverse_thrusting")||temp.equals("shield_generation")||temp.equals("shield_energy")||temp.equals("shield_fuel")||temp.equals("shield_heat")||temp.equals("solar_collection")||temp.equals("thrusting_energy")||temp.equals("thrusting_heat")||temp.equals("turn")||temp.equals("turning_energy")||temp.equals("turning_heat"))
 							number = 60*number;
 						if(temp.equals("thrust")||temp.equals("reverse_thrust")||temp.equals("afterburner_thrust"))
@@ -113,7 +114,9 @@ public class ArticleWriter{
 						//calculates shots per second, ALWAYS comes before energy, heat and damage in game files
 						if(temp.equals("reload")) {
 							perSecCalc = 60.0/number;
-							infobox += "|shots_per_sec="+format.format(perSecCalc);
+							if(name.contains("Laser")||name.contains("Beam")||name.contains("Electron")) {}
+							else
+								infobox += "|shots_per_sec="+format.format(perSecCalc);
 						}
 						
 						//solve for range calc, or statements hear just in case lifetime comes before velocity (unlikely)
@@ -147,7 +150,7 @@ public class ArticleWriter{
 			
 			//add everything to output
 			output+="<blockquote>\""+description+"\"</blockquote>\n\n<blockquote>-Outfitter Description</blockquote>\n\n";
-			output+=infobox+"}}";
+			output+=infobox+"}}\n\n";
 			if(category.equals("Guns")||category.equals("Turrets")||category.equals("Secondary Weapons"))
 				output+="[==Weapon Details==We’re still waiting on player feedback on the use of this weapon.]";
 			output+="\n\n==Outfitters==\nThe "+name+" can be purchased at the following ports:\n\n";
