@@ -152,7 +152,7 @@ public class ArticleWriter{
 			output+="<blockquote>\""+description+"\"</blockquote>\n\n<blockquote>-Outfitter Description</blockquote>\n\n";
 			output+=infobox+"}}\n\n";
 			if(category.equals("Guns")||category.equals("Turrets")||category.equals("Secondary Weapons"))
-				output+="[==Weapon Details==We’re still waiting on player feedback on the use of this weapon.]";
+				output+="==Weapon Details==\nWe’re still waiting on player feedback on the use of this weapon.";
 			output+="\n\n==Outfitters==\nThe "+name+" can be purchased at the following ports:\n\n";
 			for(String s:sellers)
 				output+="[[:Category:"+s+"|"+s+"]]\n\n";
