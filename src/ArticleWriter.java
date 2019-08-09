@@ -99,7 +99,7 @@ public class ArticleWriter{
 					}
 					//solves for per second calcs when finding energy, heat, and fuel
 					else if(temp.equals("firing_energy")||temp.equals("firing_heat")||temp.equals("firing_fuel")) {
-						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc);
+						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc)+" per second";
 						remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 					}
 					else {
@@ -158,7 +158,10 @@ public class ArticleWriter{
 				output+="[[:Category:"+s+"|"+s+"]]\n\n";
 			
 			//add categories to output
-			output+="[[Category:"+category+"]]\n";
+			if(!category.equals("Guns"))
+				output+="[[Category:"+category+"]]\n";
+			if(category.equals("Guns")||category.equals("Turrets"))
+				output+="[[Category:Energy Weapons]]\n";
 			if(category.equals("Guns")||category.equals("Turrets")||category.equals("Secondary Weapons"))
 				output+="[[Category:Weapons]]\n";
 			if(category.equals("Ammunition"))
