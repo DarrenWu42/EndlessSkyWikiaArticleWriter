@@ -116,7 +116,7 @@ public class ArticleWriter{
 							perSecCalc = 60.0/number;
 							if(name.contains("Laser")||name.contains("Beam")||name.contains("Electron")) {}
 							else
-								infobox += "|shots_per_sec="+format.format(perSecCalc);
+								infobox += "|shots_per_sec="+format.format(perSecCalc)+" shots per second";
 						}
 						
 						//solve for range calc, or statements hear just in case lifetime comes before velocity (unlikely)
