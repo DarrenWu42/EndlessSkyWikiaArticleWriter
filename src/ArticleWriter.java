@@ -102,6 +102,11 @@ public class ArticleWriter{
 						infobox +="|"+temp+"_per_sec="+format.format(number*perSecCalc)+" per second";
 						remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
 					}
+					//adds tons to the end of mass
+					else if(temp.equals("mass")) {
+						infobox += "|"+temp+"="+format.format(number)+" tons";
+						remaining = remaining.replaceAll("([\\S\\s]*?\r\n)([\\S\\s]*)", "$2");
+					}
 					else {
 						//multiplies numbers by needed amounts (found in source code)
 						if(temp.equals("active_cooling")||temp.equals("afterburner_energy")||temp.equals("afterburner_fuel")||temp.equals("afterburner_heat")||temp.equals("cloak")||temp.equals("cloaking_energy")||temp.equals("cloaking_fuel")||temp.equals("cloaking_heat")||temp.equals("cooling")||temp.equals("cooling_energy")||temp.equals("energy_consumption")||temp.equals("energy_generation")||temp.equals("fuel_consumption")||temp.equals("fuel_energy")||temp.equals("fuel_generation")||temp.equals("fuel_heat")||temp.equals("heat_generation")||temp.equals("heat_dissipation")||temp.equals("hull_repair")||temp.equals("hull_energy")||temp.equals("hull_fuel")||temp.equals("hull_heat")||temp.equals("jump_speed")||temp.equals("reverse_thrusting")||temp.equals("reverse_thrusting")||temp.equals("shield_generation")||temp.equals("shield_energy")||temp.equals("shield_fuel")||temp.equals("shield_heat")||temp.equals("solar_collection")||temp.equals("thrusting_energy")||temp.equals("thrusting_heat")||temp.equals("turn")||temp.equals("turning_energy")||temp.equals("turning_heat"))
