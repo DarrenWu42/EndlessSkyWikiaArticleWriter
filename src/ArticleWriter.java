@@ -164,8 +164,6 @@ public class ArticleWriter{
 				output+="[[Category:Energy Weapons]]\n";
 			if(category.equals("Guns")||category.equals("Turrets")||category.equals("Secondary Weapons"))
 				output+="[[Category:Weapons]]\n";
-			if(category.equals("Ammunition"))
-				output+="[[Category:Ammo]]\n";
 			output+="[[Category:Outfits]]\n";
 			for(String s:sellers)
 				output+="[[Category:"+s+"]]\n";
