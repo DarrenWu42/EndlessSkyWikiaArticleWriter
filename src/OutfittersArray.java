@@ -1,4 +1,4 @@
-package endlessSkyWikiaArticleHelper;
+
 
 public class OutfittersArray{
 	public static String[][] outfitters = 

@@ -1,4 +1,4 @@
-package endlessSkyWikiaArticleHelper;
+
 
 public class PlanetsArray{
 	public static String[][] planets  = 

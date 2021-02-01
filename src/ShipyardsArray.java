@@ -1,4 +1,4 @@
-package endlessSkyWikiaArticleHelper;
+
 
 public class ShipyardsArray{
 	public static String[][] shipyards  = 

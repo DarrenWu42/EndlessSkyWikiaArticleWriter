@@ -9,7 +9,7 @@
 *Last update: 8 August 2019
 *Github page: https://github.com/Infinight999/EndlessSkyWikiaArticleWriter
 */
-package endlessSkyWikiaArticleHelper;
+
 
 import java.util.ArrayList;
 import java.text.DecimalFormat;
